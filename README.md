@@ -13,4 +13,4 @@ npm install
 ```
 to install all the dependencies in package.json
 
-Script are already set in package.json so use `npm start` or `npm run dev` to start the app.
+Script are already set in package.json so use `npm start` or `npm run dev` to start the app then go to http://localhost:5000.
