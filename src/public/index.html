@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/socket.io/socket.io.js"></script>
+    <title>CCTV</title>
+    <style>
+        body, html {
+            padding: 0;
+            margin: 0;
+            background: black;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+        }
+        #image, body, html {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- this is where the camera feed will be displayed -->
+    <img id="image" alt="">
+</body>
+
+<script src="/script.js"></script>
+
+</html>

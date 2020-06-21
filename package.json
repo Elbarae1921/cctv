@@ -1,0 +1,27 @@
+{
+  "name": "cctv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsnd --respawn --transpileOnly --no-notify --ignore-watch node_modules src/app.ts",
+    "start": "ts-node src/app.ts",
+    "build": "tsc -p ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.6",
+    "@types/node": "^14.0.13",
+    "@types/socket.io": "^2.1.8",
+    "ts-node": "^8.10.2",
+    "ts-node-dev": "^1.0.0-pre.49",
+    "typescript": "^3.9.5"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "opencv4nodejs": "^5.6.0",
+    "socket.io": "^2.3.0"
+  }
+}
