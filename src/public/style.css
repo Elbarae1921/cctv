@@ -25,12 +25,15 @@ body {
 }
 #loading, #pause {
     position: absolute;
-    display: flex;
     justify-content: center;
+    display: flex;
     align-items: center;
     width: 100%;
     height: 100%;
     background: rgba(10, 10, 10, 0.5);
+}
+#pause {
+    display: none;
 }
 .picon {
     width: 120px;
