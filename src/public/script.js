@@ -28,45 +28,8 @@ const live = document.getElementById("live");
 // connect to the socket server
 const socket = io.connect("http://localhost:5000");
 
-// when the server emits the FPS value
-socket.on("init", fps => {
-    FPS = fps;
-});
-
-// whenever the client recieves a new image
-socket.on("image", (image64) => {
-    // push the recieved base64 string to the frames array
-    frames.push(image64);
-});
-
-// image pause onclick
-image.onclick = () => {
-    // pause the stream
-    isPaused = true;
-    // display the pause icon
-    pause.style.display = "flex";
-    // hide the refresh button
-    live.style.display = "none";
-};
-
-// pause onclick event since the image would be hidden
-pause.onclick = () => {
-    // resume the stream
-    isPaused = false;
-    // hide the pause icon
-    pause.style.display = "none";
-    // display the refresh button
-    live.style.display = "flex";
-};
-
-// live onclick to refresh the stream
-refresh.onclick = () => {
-    // empty the frames array to remove old frames and treat new ones (could be done with frames.splice(0, frames.length) too)
-    frames.length = 0;
-}
-
-// function to display frames at a 1000/FPS frame per second ratio
-setInterval(() => {
+// main function to update the image
+const updateImage = () => {
     // check if is paused
     if(!isPaused) {
         // check if the frames array was empty the last time
@@ -112,9 +75,48 @@ setInterval(() => {
                 loading.style.display = "flex";
                 // hide the refresh button
                 live.style.display = "none";
-                // set load to true (when true it will wait for the array to have enough values before resuming the stream)
+                // set load to true (when true it will wait for the array to have enough values before resuming the)
                 load = true;
             }
         }
     }       
-}, 1000 / FPS);
+}
+
+// when the server emits the FPS value
+socket.on("init", fps => {
+    FPS = fps;
+    // function to display frames at a 1000/FPS frame per second ratio
+    setInterval(updateImage, 1000 / FPS);
+});
+
+// whenever the client recieves a new image
+socket.on("image", (image64) => {
+    // push the recieved base64 string to the frames array
+    frames.push(image64);
+});
+
+// image pause onclick
+image.onclick = () => {
+    // pause the stream
+    isPaused = true;
+    // display the pause icon
+    pause.style.display = "flex";
+    // hide the refresh button
+    live.style.display = "none";
+};
+
+// pause onclick event since the image would be hidden
+pause.onclick = () => {
+    // resume the stream
+    isPaused = false;
+    // hide the pause icon
+    pause.style.display = "none";
+    // display the refresh button
+    live.style.display = "flex";
+};
+
+// live onclick to refresh the stream
+refresh.onclick = () => {
+    // empty the frames array to remove old frames and treat new ones (could be done with frames.splice(0, frames.length) too)
+    frames.length = 0;
+}
