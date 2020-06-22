@@ -19,6 +19,12 @@ const loading = document.getElementById("loading");
 // get the pause icon div
 const pause = document.getElementById("pause");
 
+// get the refresh button from the DOM
+const refresh = document.getElementById("refresh");
+
+// get the refresh button's parent elemtn
+const live = document.getElementById("live");
+
 // connect to the socket server
 const socket = io.connect("http://localhost:5000");
 
@@ -36,15 +42,22 @@ socket.on("image", (image64) => {
 
 // image pause onclick
 image.onclick = () => {
-    isPaused = !isPaused;
-    pause.style.display = isPaused ? "flex" : "none";
+    isPaused = true;
+    pause.style.display = "flex";
+    live.style.display = "none";
 };
 
 // pause onclick event since the image would be hidden
 pause.onclick = () => {
-    isPaused = !isPaused;
-    pause.style.display = isPaused ? "flex" : "none";
+    isPaused = false;
+    pause.style.display = "none";
+    live.style.display = "flex";
 };
+
+// live onclick to refresh the stream
+refresh.onclick = () => {
+    frames.length = 0;
+}
 
 // function to display frames at a 1000/FPS frame per second ratio
 setInterval(() => {
@@ -57,6 +70,12 @@ setInterval(() => {
                 loading.style.display = "none";
                 image.src = `data:image/jpeg;base64,${frames.shift()}`;
                 load = false;
+                if(frames.length > FPS*2) {
+                    live.style.display = "flex";
+                }
+                else {
+                    live.style.display = "none";
+                }
             }
         }
         else {
@@ -64,9 +83,16 @@ setInterval(() => {
             if(frames.length != 0) {
                 loading.style.display = "none";
                 image.src = `data:image/jpeg;base64,${frames.shift()}`;
+                if(frames.length > FPS*2) {
+                    live.style.display = "flex";
+                }
+                else {
+                    live.style.display = "none";
+                }
             }
             else {
                 loading.style.display = "flex";
+                live.style.display = "none";
                 load = true;
             }
         }
