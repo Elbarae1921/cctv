@@ -26,7 +26,7 @@ const refresh = document.getElementById("refresh");
 const live = document.getElementById("live");
 
 // connect to the socket server
-const socket = io.connect("http://localhost:5000");
+const socket = io();
 
 // main function to update the image
 const updateImage = () => {
