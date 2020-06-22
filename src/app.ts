@@ -33,16 +33,17 @@ app.get('/', (_, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
+// send the FPS to client upon connection
+io.on("connection", socket => {
+    socket.emit("init", FPS);
+});
+
 // function to send a new image through socket
 const sendImage = () => {
     // read a new frame
     const frame = wCap.read();
     // create a base64 string from the image
     const image = cv.imencode(".jpg", frame).toString("base64");
-    // send the FPS
-    io.on("connection", socket => {
-        socket.emit("init", FPS);
-    });
     // send the string
     io.emit('image', image);
 }
