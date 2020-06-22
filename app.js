@@ -1,8 +1,8 @@
-import cv from "opencv4nodejs";
-import express from "express";
-import path from "path";
-import http from "http";
-import socketio from "socket.io";
+const cv = require("opencv4nodejs");
+const express = require("express");
+const path = require("path");
+const http = require("http");
+const socketio = require("socket.io");
 
 // how many frames per second (too big a number might cause performance issues depending on the CPU)
 const FPS = 20;
