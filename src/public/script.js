@@ -10,6 +10,9 @@ let load = true;
 // initialize the isPaused variable for pause functionality
 let isPaused = false;
 
+// boolean to only set the image dimensions when necessary
+let dimSet = false;
+
 // get the image element
 const image = document.getElementById("image");
 
@@ -90,9 +93,17 @@ socket.on("init", fps => {
 });
 
 // whenever the client recieves a new image
-socket.on("image", (image64) => {
+socket.on("image", ({image64, width, height}) => {
     // push the recieved base64 string to the frames array
     frames.push(image64);
+    // get device width
+    var screenWidth = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+    // check if width is less than 895 pixels
+    if(screenWidth < 895 && !dimSet) {
+        image.style.width = "100%";
+        image.style.height = `${Math.abs(width - (Math.abs(width-screenWidth))/(height/width))}px`;
+        dimSet = true;
+    }
 });
 
 // image pause onclick
