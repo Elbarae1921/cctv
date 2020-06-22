@@ -6,7 +6,7 @@
   "scripts": {
     "copy-files": "copyfiles -u 1 src/**/*.js src/**/*.html dist",
     "dev": "tsnd --respawn --transpileOnly --no-notify --ignore-watch node_modules src/app.ts",
-    "start": "ts-node src/app.ts",
+    "start": "node dist/app.js",
     "build": "tsc -p .",
     "postbuild": "npm run copy-files"
   },
