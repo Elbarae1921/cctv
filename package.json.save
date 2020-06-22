@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "copy-files": "copyfiles -u 1 src/**/*.js src/**/*.html dist",
+    "copy-files": "copyfiles -u 1 src/**/*.jscopyfiles -u 1 src/**/*.js lib lib",
     "dev": "tsnd --respawn --transpileOnly --no-notify --ignore-watch node_modules src/app.ts",
     "start": "ts-node src/app.ts",
     "build": "tsc -p .",
