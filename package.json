@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "copy-files": "copyfiles -u 1 src/**/*.js src/**/*.html dist",
+    "copy-files": "copyfiles -u 1 src/**/*.js src/**/*.html src/**/*.css dist",
     "dev": "tsnd --respawn --transpileOnly --no-notify --ignore-watch node_modules src/app.ts",
     "start": "ts-node src/app.ts",
-    "build": "tsc -p .",
+    "build": "rm -rf dist/ && tsc -p .",
     "postbuild": "npm run copy-files"
   },
   "keywords": [],
