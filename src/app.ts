@@ -5,7 +5,7 @@ import http from "http";
 import socketio from "socket.io";
 
 // how many frames per second (too big a number might cause performance issues depending on the CPU)
-const FPS = 5;
+const FPS = 20;
 
 // get a video capture object
 const wCap = new cv.VideoCapture(0); // 0 is the id of the facecam
@@ -39,6 +39,10 @@ const sendImage = () => {
     const frame = wCap.read();
     // create a base64 string from the image
     const image = cv.imencode(".jpg", frame).toString("base64");
+    // send the FPS
+    io.on("connection", socket => {
+        socket.emit("init", FPS);
+    });
     // send the string
     io.emit('image', image);
 }
